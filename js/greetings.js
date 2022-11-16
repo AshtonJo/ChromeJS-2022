@@ -10,7 +10,7 @@ function onLoginSubmit(event) {
     loginForm.classList.add(HIDDEN_CLASSNAME);
     const username = loginInput.value;
     localStorage.setItem(USERNAME_KEY,username);
-    paintGreetings();
+    paintGreetings(username);
 }
 
 function paintGreetings(username) { // 중복되는 기능 함수화
@@ -18,12 +18,11 @@ function paintGreetings(username) { // 중복되는 기능 함수화
     greeting.classList.remove(HIDDEN_CLASSNAME);
 }
 
-loginForm.addEventListener("submit",onLoginSubmit); // submit은 엔터를 누르거나 버튼을 클릭할 때 발생
-
 const savedUsername = localStorage.getItem(USERNAME_KEY);
 
 if(savedUsername === null) { // savedUsername 값이 null 이라면 form의 hidden class명을 지워준다.
     loginForm.classList.remove(HIDDEN_CLASSNAME);// show the form
+    loginForm.addEventListener("submit", onLoginSubmit);
 } else {
     paintGreetings(savedUsername); // show the greetings(h1)
 }
